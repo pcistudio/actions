@@ -11,14 +11,14 @@ This action help to automatically synchronize the develop branch, once is merge 
 ### Usage:
 
 ```yaml
-      - name:
-        uses: pcistudio/actions/sync-develop@v1
-        with:
-            main-branch: main
-            develop-branch: develop
-            ssh-key: ${{ secrets.SSH_KEY }}
-            user-email: "release-bot"
-            user-name: "release-bot@email.com"
+  - name:
+    uses: pcistudio/actions/sync-develop@v1
+    with:
+        main-branch: main
+        develop-branch: develop
+        ssh-key: ${{ secrets.SSH_KEY }}
+        user-email: "release-bot"
+        user-name: "release-bot@email.com"
 ```
 
 ### Inputs Parameters
