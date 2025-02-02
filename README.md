@@ -12,7 +12,7 @@ This action help to automatically synchronize the develop branch, once is merge 
 
 ```yaml
       - name:
-        uses: pcistudio/actions/sync-develop@1
+        uses: pcistudio/actions/sync-develop@v1
         with:
             main-branch: main
             develop-branch: develop
