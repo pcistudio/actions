@@ -8,6 +8,7 @@ inputs:
   develop-branch:
     description: >
       The branch, that you want to synchronize after the merge and squash build happen.
+    required: true
   ssh-key:
     description: >
       SSH key used to fetch the repository. The SSH key is configured with the local
@@ -21,41 +22,36 @@ inputs:
     required: true
 
 runs:
-    using: 'composite'
-    steps:
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+  using: "composite"
+  steps:
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: Checkout repository ${{github.repository }} branch ${{ inputs.develop-branch }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.develop-branch }}
-          persist-credentials: true
-          fetch-depth: 0
-          ssh-key: ${{ inputs.ssh-key }}
-      - name: Checkout repository ${{github.repository }} branch ${{ inputs.main-branch }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.main-branch }}
-          persist-credentials: true
-          fetch-depth: 0
-          ssh-key: ${{ inputs.ssh-key }}
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Set Git Author
-        run: |
-          git config --global user.name "${{ inputs.user-name }}"
-          git config --global user.email "${{ inputs.user-email }}"
-      - name: Synchronize ${{ inputs.develop-branch }} branch with ${{ inputs.main-branch }}
-        run: |
-          git checkout ${{ inputs.develop-branch }}
-          git rebase ${{ inputs.main-branch }}
-      - name: Push changes to ${{ inputs.develop-branch }} branch
-        run: git push origin ${{ inputs.develop-branch }} --force-with-lease
+    - name: Checkout repository ${{github.repository }} branch ${{ inputs.develop-branch }}
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.develop-branch }}
+        persist-credentials: true
+        fetch-depth: 0
+        ssh-key: ${{ inputs.ssh-key }}
+    - name: Checkout repository ${{github.repository }} branch ${{ inputs.main-branch }}
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.main-branch }}
+        persist-credentials: true
+        fetch-depth: 0
+        ssh-key: ${{ inputs.ssh-key }}
+    - name: Set Git Author
+      run: |
+        git config --global user.name "${{ inputs.user-name }}"
+        git config --global user.email "${{ inputs.user-email }}"
+    - name: Synchronize ${{ inputs.develop-branch }} branch with ${{ inputs.main-branch }}
+      run: |
+        git checkout ${{ inputs.develop-branch }}
+        git rebase ${{ inputs.main-branch }}
+    - name: Push changes to ${{ inputs.develop-branch }} branch
+      run: git push origin ${{ inputs.develop-branch }} --force-with-lease
