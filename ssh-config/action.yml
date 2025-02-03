@@ -14,3 +14,5 @@ runs:
         ./ssh-config/configure.sh
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
+        RELEASE_EMAIL: ${{ vars.RELEASE_EMAIL }}
+        REPO: ${{ github.repository }}
