@@ -44,6 +44,12 @@ runs:
         echo "Creating SSH key for ${REPO}"
         mkdir -p ~/.ssh
         ssh-keygen -t ed25519 -f "${KEY_PATH}" -N "" -C "${RELEASE_EMAIL}" > /dev/null
+        
+        {
+          echo 'ssh_key<<EOF'
+          cat "$HOME/.ssh/id_ed25519"
+          echo EOF
+        } >> "$GITHUB_OUTPUT"
 
 #        SSH_PRIV=$(cat "${KEY_PATH}");
 #        echo "ssh_key=${SSH_PRIV}" >> $GITHUB_OUTPUT
@@ -54,20 +60,23 @@ runs:
         REPO: ${{ inputs.repo }}
         GH_TOKEN: ${{ inputs.token }}
         GITHUB_OUTPUT: $GITHUB_OUTPUT
-    - name: Set the value in bash
-      id: step_one
-      shell: bash
-      run: |
-        {
-          echo 'ssh_key<<EOF'
-          cat "$HOME/.ssh/id_ed25519"
-          echo EOF
-        } >> "$GITHUB_OUTPUT"
+#    - name: Set the value in bash
+#      id: step_one
+#      shell: bash
+#      run: |
+#        {
+#          echo 'ssh_key<<EOF'
+#          cat "$HOME/.ssh/id_ed25519"
+#          echo EOF
+#        } >> "$GITHUB_OUTPUT"
     - name: "Test"
       shell: bash
       run: |
         echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
-        [ -z "${{ steps.step_one.outputs.ssh_key }}" ] && echo "No Key" || echo "KEY present"
+#        [ -z "${{ steps.step_one.outputs.ssh_key }}" ] && echo "No Key" || echo "KEY present"
+        [ -z "${{ steps.ssh_gen.outputs.ssh_key }}" ] && echo "No Key" || echo "KEY present"
+        
+        
 
         
         
