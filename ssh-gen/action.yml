@@ -18,7 +18,7 @@ inputs:
 outputs:
   ssh-key:
     description: 'ssh key generated'
-    value: ${{ steps.ssh_gen.outputs.ssh_key }}
+    value: ${{ steps.step_one.outputs.ssh_key }}
   test-data:
     description: 'test'
     value: ${{ steps.ssh_gen.outputs.test }}
@@ -67,7 +67,7 @@ runs:
       shell: bash
       run: |
         echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
-        [ -z "${{ steps.ssh_gen.outputs.ssh_key }}" ] && echo "No Key" || echo "KEY present"
+        [ -z "${{ steps.step_one.outputs.ssh_key }}" ] && echo "No Key" || echo "KEY present"
 
         
         
