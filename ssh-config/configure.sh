@@ -16,9 +16,8 @@ SSH_PRIV=$(cat ~/.ssh/id_ed25519);
 
 gh secret set "${SSH_KEY_NAME}" --body "${SSH_PRIV}" --repo "${REPO}"
 
-#gh secret set SSH_PRIVATE_KEY_1 --body "test" --repo pcistudio/actions
 
-#gh repo deploy-key add ~/.ssh/id_ed25519.pub --title "release" --read-only --repo "${REPO}"
+gh repo deploy-key add ~/.ssh/id_ed25519.pub --title "release" --repo "${REPO}"
 
 
 
