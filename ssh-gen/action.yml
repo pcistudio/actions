@@ -65,7 +65,3 @@ runs:
         RELEASE_EMAIL: ${{ inputs.user-email }}
         REPO: ${{ inputs.repo }}
         GH_TOKEN: ${{ inputs.token }}
-
-        
-        
-
