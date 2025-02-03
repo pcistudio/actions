@@ -18,7 +18,7 @@ inputs:
 outputs:
   ssh-key:
     description: 'ssh key generated'
-    value: ${{ steps.ssh-gen.outputs.ssh_key }}
+    value: ${{ steps.ssh_gen.outputs.ssh_key }}
   test-data:
     description: 'test'
     value: ${{ steps.ssh-gen.outputs.test }}
@@ -30,7 +30,7 @@ runs:
         repository: pcistudio/actions
         ref: v1
         path: ./pcistudio_actions
-    - id: ssh-gen
+    - id: ssh_gen
       shell: bash
       run: |
         ./pcistudio_actions/ssh-gen/configure.sh
@@ -42,4 +42,9 @@ runs:
         GH_TOKEN: ${{ inputs.token }}
         GITHUB_OUTPUT: $GITHUB_OUTPUT
 #        SSH_KEY: ${{ secrets.${{ inputs.ssh-key-name }} }}
+    - name: "Test"
+      shell: bash
+      run: |
+        echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
+        
 
