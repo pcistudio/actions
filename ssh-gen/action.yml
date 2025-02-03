@@ -22,11 +22,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
-      with:
-        repository: pcistudio/actions
-        ref: v1
-        path: ./pcistudio_actions
     - id: ssh_gen
       shell: bash
       run: |
