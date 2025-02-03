@@ -21,7 +21,7 @@ outputs:
     value: ${{ steps.ssh_gen.outputs.ssh_key }}
   test-data:
     description: 'test'
-    value: ${{ steps.ssh-gen.outputs.test }}
+    value: ${{ steps.ssh_gen.outputs.test }}
 runs:
   using: "composite"
   steps:
