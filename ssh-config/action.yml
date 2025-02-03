@@ -5,6 +5,13 @@ inputs:
     description: >
       The name of the secret that contains the SSH key used to fetch the repository.
     default: "SSH_PRIVATE_KEY"
+  repo:
+    description: >
+      The repository that you want to synchronize after the merge and squash build happen.
+    required: true
+  user-email:
+    description: 'The email of the user that will be used to commit the changes'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -14,5 +21,5 @@ runs:
         ./ssh-config/configure.sh
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
-        RELEASE_EMAIL: ${{ vars.RELEASE_EMAIL }}
-        REPO: ${{ github.repository }}
+        RELEASE_EMAIL: ${{ inputs.user-email }}
+        REPO: ${{ inputs.repo }}

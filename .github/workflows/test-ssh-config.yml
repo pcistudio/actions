@@ -13,3 +13,7 @@ jobs:
     steps:
       - name: Configure SSH Key
         uses: pcistudio/actions/ssh-config@5-create-ssh-config-action
+        with:
+          ssh-key-name: "SSH_PRIVATE_KEY"
+          repo: ${{ github.repository }}
+          user-email: ${{ vars.RELEASE_EMAIL }}
