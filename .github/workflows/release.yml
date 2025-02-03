@@ -17,6 +17,10 @@ jobs:
         run: gh release create ${{ env.VERSION }} -t "Release ${{ env.VERSION }}" -n "Release ${{ env.VERSION }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set Git Author
+        run: |
+          git config --global user.name "${{ vars.RELEASE_USER }}"
+          git config --global user.email "${{ vars.RELEASE_EMAIL }}"
       - name: Update Major Version Tag to Latest Release
         run: |
           git tag -fa ${{ env.MAJOR_VERSION }} -m "Update ${{ env.MAJOR_VERSION }} to latest release"
