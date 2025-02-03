@@ -22,10 +22,10 @@ runs:
       with:
         repository: pcistudio/actions
         ref: v1
-        path: ./actions
+        path: ./pcistudio_actions
     - shell: bash
       run: |
-        ./actions/ssh-gen/configure.sh
+        ./pcistudio_actions/ssh-gen/configure.sh
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
         RELEASE_EMAIL: ${{ inputs.user-email }}

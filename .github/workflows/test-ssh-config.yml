@@ -14,7 +14,7 @@ env:
 permissions: write-all
 
 jobs:
-  ssh-config:
+  ssh-key-generation:
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH Key
