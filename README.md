@@ -30,3 +30,30 @@ This action help to automatically synchronize the develop branch, once is merge 
 | ssh-key | SSH key used to fetch the repository | | true     |
 | user-name | The name of the user that will be used to commit the changes | release-bot | false    |
 | user-email | The email of the user that will be used to commit the changes | | true     |
+
+
+## ssh-config
+
+This action help to automatically configure the ssh key needed to fetch the repository that need to push changes.
+
+### Usage:
+
+```yaml
+
+  - name: Configure SSH Key
+    uses: pcistudio/actions/ssh-config@v1
+    with:
+      ssh-key-name: "SSH_PRIVATE_KEY"
+      user-email: ${{ vars.RELEASE_EMAIL }}
+      token: PAT_TOKEN
+```
+
+### Inputs Parameters
+
+| Name | Description                                                       | Default                           | Required |
+|------|-------------------------------------------------------------------|-----------------------------------|----------|
+| ssh-key-name | The name of the secret that will contains the ssh key             | `SSH_PRIVATE_KEY`                                  | false    |
+| user-email | The email of the user that will be used generate the ssh key      |                                   | true     |
+| token | The token use to store the key in the secrets. Needs to be a PAT  |                                   | true     |
+| repo | The repository where the ssh key will be used                     | current repo `${github.repository}` | false    |
+

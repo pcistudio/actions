@@ -8,7 +8,7 @@ inputs:
   repo:
     description: >
       The repository that you want to synchronize after the merge and squash build happen.
-    required: true
+    default: ${{ github.repository }}
   user-email:
     description: 'The email of the user that will be used to commit the changes'
     required: true
