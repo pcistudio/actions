@@ -45,8 +45,8 @@ runs:
         mkdir -p ~/.ssh
         ssh-keygen -t ed25519 -f "${KEY_PATH}" -N "" -C "${RELEASE_EMAIL}" > /dev/null
 
-        SSH_PRIV=$(cat "${KEY_PATH}"| base64 -w0);
-        echo "ssh_key=${SSH_PRIV}" >> $GITHUB_OUTPUT
+#        SSH_PRIV=$(cat "${KEY_PATH}");
+#        echo "ssh_key=${SSH_PRIV}" >> $GITHUB_OUTPUT
 
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
@@ -59,7 +59,7 @@ runs:
       shell: bash
       run: |
         {
-          echo 'response<<EOF'
+          echo 'ssh_key<<EOF'
           cat "$HOME/.ssh/id_ed25519"
           echo EOF
         } >> "$GITHUB_OUTPUT"
@@ -67,9 +67,8 @@ runs:
       shell: bash
       run: |
         echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
-        [ -z ${{ steps.ssh_gen.outputs.ssh_key }} ] && echo "No Key" || echo "KEY present"
+        [ -z "${{ steps.ssh_gen.outputs.ssh_key }}" ] && echo "No Key" || echo "KEY present"
 
-        [ -z "${{ steps.step_one.outputs.response }}" ] && echo "No RESPONSE" || echo "RESPONSE present"
         
         
 
