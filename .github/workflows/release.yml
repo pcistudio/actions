@@ -5,7 +5,8 @@ on:
     branches:
       - main
 env:
-  VERSION: v1.${{ github.run_number }}
+  MAJOR_VERSION: v1
+  VERSION: ${{ env.MAJOR_VERSION }}.${{ github.run_number }}
 jobs:
   tag-release:
     runs-on: ubuntu-latest
@@ -16,3 +17,7 @@ jobs:
         run: gh release create ${{ env.VERSION }} -t "Release ${{ env.VERSION }}" -n "Release ${{ env.VERSION }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update Major Version Tag to Latest Release
+        run: |
+          git tag -fa ${{ env.MAJOR_VERSION }} -m "Update ${{ env.MAJOR_VERSION }} to latest release"
+          git push origin ${{ env.MAJOR_VERSION }} --force
