@@ -36,5 +36,5 @@ runs:
         RELEASE_EMAIL: ${{ inputs.user-email }}
         REPO: ${{ inputs.repo }}
         GH_TOKEN: ${{ inputs.token }}
-        SSH_KEY: secrets.${{ inputs.ssh-key-name }}
+        SSH_KEY: ${{ secrets.${{ inputs.ssh-key-name }} }}
 

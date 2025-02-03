@@ -5,6 +5,7 @@
 #echo "REPO=${REPO}"
 
 set -e
+set -x
 
 #[ -z "SSH_KEY" ] && echo "SSH_KEY is not set" && exit 1
 
@@ -18,7 +19,7 @@ mkdir -p ~/.ssh
 ssh-keygen -t ed25519 -f "${KEY_PATH}" -N "" -C "${RELEASE_EMAIL}" > /dev/null
 
 SSH_PRIV=$(cat "${KEY_PATH}");
-echo "ssh_key=${SSH_PRIV}" >> "$GITHUB_OUTPUT"
+echo "ssh_key=${SSH_PRIV}" >> $GITHUB_OUTPUT
 
 gh secret set "${SSH_KEY_NAME}" --body "${SSH_PRIV}" --repo "${REPO}"
 echo "SSH key added to GitHub secret ${SSH_KEY_NAME}"
