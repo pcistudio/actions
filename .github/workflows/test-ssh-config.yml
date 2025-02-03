@@ -1,0 +1,28 @@
+name: Release actions
+
+on:
+  push:
+    branches:
+      - 5-create-ssh-config-action
+env:
+  MAJOR_VERSION: v1
+  VERSION: v1.${{ github.run_number }}
+#permissions:
+#  contents: write
+#  id-token: write
+#  repository-projects: write
+permissions: write-all
+
+jobs:
+  ssh-config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH Key
+        uses: pcistudio/actions/ssh-config@5-create-ssh-config-action
+        with:
+          ssh-key-name: "SSH_PRIVATE_KEY"
+          repo: ${{ github.repository }}
+          user-email: ${{ vars.RELEASE_EMAIL }}
+          token: ${{ secrets.GIT_ADMIN_PAT }}
+        env:
+          GH_TOKEN: ${{ secrets.GIT_ADMIN_PAT }}

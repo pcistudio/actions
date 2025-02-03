@@ -1,0 +1,30 @@
+name: 'Sync develop'
+description: 'This action help to automatically synchronize the develop branch, once is merge and squash with main'
+inputs:
+  ssh-key-name:
+    description: >
+      The name of the secret that contains the SSH key used to fetch the repository.
+    default: "SSH_PRIVATE_KEY"
+  repo:
+    description: >
+      The repository that you want to synchronize after the merge and squash build happen.
+    required: true
+  user-email:
+    description: 'The email of the user that will be used to commit the changes'
+    required: true
+  token:
+    description: >
+      Token use to create the ssh keys.
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+    - shell: bash
+      run: |
+        ./ssh-config/configure.sh
+      env:
+        SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
+        RELEASE_EMAIL: ${{ inputs.user-email }}
+        REPO: ${{ inputs.repo }}
+        GH_TOKEN: ${{ inputs.token }}
