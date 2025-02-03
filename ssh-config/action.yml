@@ -10,4 +10,6 @@ runs:
   steps:
     - shell: bash
       run: |
-        echo "ssh-key-name: ${{ inputs.ssh-key-name }}"
+        ./configure.ssh
+      env:
+        SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
