@@ -6,7 +6,7 @@ on:
       - main
 env:
   MAJOR_VERSION: v1
-  VERSION: ${{ env.MAJOR_VERSION }}.${{ github.run_number }}
+  VERSION: v1.${{ github.run_number }}
 jobs:
   tag-release:
     runs-on: ubuntu-latest
