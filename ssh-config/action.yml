@@ -1,0 +1,13 @@
+name: 'Sync develop'
+description: 'This action help to automatically synchronize the develop branch, once is merge and squash with main'
+inputs:
+  ssh-key-name:
+    description: >
+      The name of the secret that contains the SSH key used to fetch the repository.
+    default: "SSH_PRIVATE_KEY"
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        echo "ssh-key-name: ${{ inputs.ssh-key-name }}"
