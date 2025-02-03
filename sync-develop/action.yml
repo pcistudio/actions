@@ -25,6 +25,7 @@ runs:
   using: "composite"
   steps:
     - name: Set up SSH
+      shell: bash
       run: |
         mkdir -p ~/.ssh
         echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519
@@ -46,12 +47,15 @@ runs:
         fetch-depth: 0
         ssh-key: ${{ inputs.ssh-key }}
     - name: Set Git Author
+      shell: bash
       run: |
         git config --global user.name "${{ inputs.user-name }}"
         git config --global user.email "${{ inputs.user-email }}"
     - name: Synchronize ${{ inputs.develop-branch }} branch with ${{ inputs.main-branch }}
+      shell: bash
       run: |
         git checkout ${{ inputs.develop-branch }}
         git rebase ${{ inputs.main-branch }}
     - name: Push changes to ${{ inputs.develop-branch }} branch
+      shell: bash
       run: git push origin ${{ inputs.develop-branch }} --force-with-lease
