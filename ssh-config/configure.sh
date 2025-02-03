@@ -9,7 +9,7 @@ set -e
 KEY_PATH="$HOME/.ssh/id_ed25519"
 PUB_KEY_PATH="${KEY_PATH}.pub"
 
-gh secret list --repo "${REPO}" | grep "${SSH_KEY_NAME}" && echo "SSH key already exists" && exit 0
+gh secret list --repo "${REPO}" | grep "${SSH_KEY_NAME}" > /dev/null && echo "SSH key already exists" && exit 0
 
 echo "Creating SSH key for ${REPO}"
 mkdir -p ~/.ssh
