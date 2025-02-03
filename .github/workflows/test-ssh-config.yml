@@ -17,3 +17,5 @@ jobs:
           ssh-key-name: "SSH_PRIVATE_KEY"
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
