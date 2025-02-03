@@ -19,9 +19,13 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v4
+      with:
+        repository: pcistudio/actions
+        ref: v1
+        path: ./pcistudio_actions
     - shell: bash
       run: |
-        ./ssh-config/configure.sh
+        ./pcistudio_actions/ssh-gen/configure.sh
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
         RELEASE_EMAIL: ${{ inputs.user-email }}
