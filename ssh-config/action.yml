@@ -12,11 +12,10 @@ inputs:
   user-email:
     description: 'The email of the user that will be used to commit the changes'
     required: true
-#  token:
-#    description: >
-#      The token used to fetch the repository. The token is configured with the local
-#      git config, which enables your scripts to run authenticated git commands.
-#    required: true
+  token:
+    description: >
+      Token use to create the ssh keys.
+    required: true
 runs:
   using: "composite"
   steps:
@@ -28,3 +27,4 @@ runs:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
         RELEASE_EMAIL: ${{ inputs.user-email }}
         REPO: ${{ inputs.repo }}
+        GH_TOKEN: ${{ inputs.token }}

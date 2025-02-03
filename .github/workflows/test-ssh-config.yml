@@ -23,5 +23,6 @@ jobs:
           ssh-key-name: "SSH_PRIVATE_KEY"
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
+          token: ${{ secrets.GIT_ADMIN_PAT }}
         env:
           GH_TOKEN: ${{ secrets.GIT_ADMIN_PAT }}
