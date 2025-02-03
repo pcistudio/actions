@@ -67,6 +67,7 @@ runs:
         GITHUB_OUTPUT: $GITHUB_OUTPUT
 #        SSH_KEY: ${{ secrets.${{ inputs.ssh-key-name }} }}
     - name: Set the value in bash
+#      TODO: Add exclusion when the key don't exist
       id: step_one
       shell: bash
       run: |
@@ -80,7 +81,7 @@ runs:
       run: |
         echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
         [ -z ${{ steps.ssh_gen.outputs.ssh_key }} ] && echo "No Key" || echo "KEY present";
-        [ -z ${{ steps.ssh_gen.outputs.JSON_RESPONSE }} ] && echo "No RESPONSE" || echo "RESPONSE present";
+        [ -z ${{ steps.step_one.outputs.JSON_RESPONSE }} ] && echo "No RESPONSE" || echo "RESPONSE present";
         
         
 
