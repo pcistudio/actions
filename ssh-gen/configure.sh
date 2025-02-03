@@ -8,7 +8,7 @@ set -e
 set -x
 
 #[ -z "SSH_KEY" ] && echo "SSH_KEY is not set" && exit 1
-
+echo "test=data365" >> $GITHUB_OUTPUT
 KEY_PATH="$HOME/.ssh/id_ed25519"
 PUB_KEY_PATH="${KEY_PATH}.pub"
 

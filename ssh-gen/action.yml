@@ -34,7 +34,7 @@ runs:
       shell: bash
       run: |
         ./pcistudio_actions/ssh-gen/configure.sh
-        echo "test=data360" >> $GITHUB_OUTPUT
+#        echo "test=data360" >> $GITHUB_OUTPUT
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
         RELEASE_EMAIL: ${{ inputs.user-email }}
