@@ -49,13 +49,7 @@ runs:
 
         SSH_PRIV=$(cat "${KEY_PATH}");
 #        echo "ssh_key=${SSH_PRIV}" >> $GITHUB_OUTPUT
-        
-#        {
-#          echo 'ssh_key<<EOF'
-#          cat "${KEY_PATH}"
-#          echo EOF
-#        } >> "$GITHUB_OUTPUT";
-          
+
         echo 'ssh_key<<EOF' >> $GITHUB_OUTPUT
         cat "${KEY_PATH}" >> $GITHUB_OUTPUT
         echo EOF >> $GITHUB_OUTPUT
