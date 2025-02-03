@@ -34,14 +34,14 @@ This action help to automatically synchronize the develop branch, once is merge 
 
 ## ssh-config
 
-This action help to automatically configure the ssh key needed to fetch the repository that need to push changes.
+This action help to automatically generate the ssh keys, store the private key in a secret and the public is set in the deploy keys of the repository.
 
 ### Usage:
 
 ```yaml
 
   - name: Configure SSH Key
-    uses: pcistudio/actions/ssh-config@v1
+    uses: pcistudio/actions/ssh-gen@v1
     with:
       ssh-key-name: "SSH_PRIVATE_KEY"
       user-email: ${{ vars.RELEASE_EMAIL }}
@@ -50,10 +50,10 @@ This action help to automatically configure the ssh key needed to fetch the repo
 
 ### Inputs Parameters
 
-| Name | Description                                                       | Default                           | Required |
-|------|-------------------------------------------------------------------|-----------------------------------|----------|
-| ssh-key-name | The name of the secret that will contains the ssh key             | `SSH_PRIVATE_KEY`                                  | false    |
-| user-email | The email of the user that will be used generate the ssh key      |                                   | true     |
-| token | The token use to store the key in the secrets. Needs to be a PAT  |                                   | true     |
-| repo | The repository where the ssh key will be used                     | current repo `${github.repository}` | false    |
+| Name | Description                                                        | Default                           | Required |
+|------|--------------------------------------------------------------------|-----------------------------------|----------|
+| ssh-key-name | The name of the secret that will have the ssh key                  | `SSH_PRIVATE_KEY`                                  | false    |
+| user-email | The email of the user that will be used to generate the ssh key    |                                   | true     |
+| token | The token use to store the key in the secrets. Needs to be a PAT   |                                   | true     |
+| repo | The repository were you want to create the secret with the SSH KEY | current repo `${github.repository}` | false    |
 

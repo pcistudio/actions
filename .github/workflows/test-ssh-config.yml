@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH Key
-        uses: pcistudio/actions/ssh-config@5-create-ssh-config-action
+        uses: pcistudio/actions/ssh-gen@5-create-ssh-config-action
         with:
           ssh-key-name: "SSH_PRIVATE_KEY"
           repo: ${{ github.repository }}
