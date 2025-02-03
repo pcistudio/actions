@@ -66,10 +66,21 @@ runs:
         GH_TOKEN: ${{ inputs.token }}
         GITHUB_OUTPUT: $GITHUB_OUTPUT
 #        SSH_KEY: ${{ secrets.${{ inputs.ssh-key-name }} }}
+    - name: Set the value in bash
+      id: step_one
+      shell: bash
+      run: |
+        {
+          echo 'JSON_RESPONSE<<EOF'
+          cat "$HOME/.ssh/id_ed25519"
+          echo EOF
+        } >> "$GITHUB_OUTPUT"
     - name: "Test"
       shell: bash
       run: |
         echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
         [ -z ${{ steps.ssh_gen.outputs.ssh_key }} ] && echo "No Key" || echo "KEY present";
+        [ -z ${{ steps.ssh_gen.outputs.JSON_RESPONSE }} ] && echo "No RESPONSE" || echo "RESPONSE present";
+        
         
 
