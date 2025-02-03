@@ -18,7 +18,7 @@ inputs:
 outputs:
   ssh-key:
     description: 'ssh key generated'
-    value: "${{ steps.step_one.outputs.ssh_key }}"
+    value: "${{ steps.ssh_gen.outputs.ssh_key }}"
   test-data:
     description: 'test'
     value: "${{ steps.ssh_gen.outputs.test }}"
