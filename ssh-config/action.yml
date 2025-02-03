@@ -8,8 +8,9 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v4
     - shell: bash
       run: |
-        ./configure.sh
+        ../ssh-config/configure.sh
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
