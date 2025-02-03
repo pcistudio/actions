@@ -7,6 +7,10 @@ on:
 env:
   MAJOR_VERSION: v1
   VERSION: v1.${{ github.run_number }}
+permissions:
+  contents: write
+  id-token: write
+  repository-projects: write
 jobs:
   ssh-config:
     runs-on: ubuntu-latest
