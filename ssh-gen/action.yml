@@ -15,6 +15,10 @@ inputs:
     description: >
       The token use to store the key in the secrets
     required: true
+outputs:
+  ssh-key:
+    description: 'ssh key generated'
+    value: ${{ steps.ssh-gen.outputs.ssh_key }}
 runs:
   using: "composite"
   steps:
@@ -23,7 +27,8 @@ runs:
         repository: pcistudio/actions
         ref: v1
         path: ./pcistudio_actions
-    - shell: bash
+    - id: ssh-gen
+      shell: bash
       run: |
         ./pcistudio_actions/ssh-gen/configure.sh
       env:
@@ -31,3 +36,5 @@ runs:
         RELEASE_EMAIL: ${{ inputs.user-email }}
         REPO: ${{ inputs.repo }}
         GH_TOKEN: ${{ inputs.token }}
+        SSH_KEY: secrets.${{ inputs.ssh-key-name }}
+
