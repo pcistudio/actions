@@ -72,7 +72,7 @@ runs:
       shell: bash
       run: |
         {
-          echo 'JSON_RESPONSE<<EOF'
+          echo 'response<<EOF'
           cat "$HOME/.ssh/id_ed25519"
           echo EOF
         } >> "$GITHUB_OUTPUT"
@@ -81,7 +81,7 @@ runs:
       run: |
         echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
         [ -z ${{ steps.ssh_gen.outputs.ssh_key }} ] && echo "No Key" || echo "KEY present";
-        [ -z ${{ steps.step_one.outputs.JSON_RESPONSE }} ] && echo "No RESPONSE" || echo "RESPONSE present";
+        [ -z ${{ steps.step_one.outputs.response }} ] && echo "No RESPONSE" || echo "RESPONSE present";
         
         
 
