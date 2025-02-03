@@ -21,3 +21,5 @@ jobs:
       - name: LOG
         run: |
           [ -z ${{ steps.ssh-gen.outputs.ssh-key }} ] && echo "No SSH key generated" || echo "SSH key generated";
+          [ -z ${{ steps.ssh-gen.outputs.test-data }} ] && echo "No test data" || echo "test_data=${{ steps.ssh-gen.outputs.test-data }}";
+          

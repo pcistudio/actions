@@ -19,6 +19,9 @@ outputs:
   ssh-key:
     description: 'ssh key generated'
     value: ${{ steps.ssh-gen.outputs.ssh_key }}
+  test-data:
+    description: 'test'
+    value: ${{ steps.ssh-gen.outputs.test }}
 runs:
   using: "composite"
   steps:
@@ -31,6 +34,7 @@ runs:
       shell: bash
       run: |
         ./pcistudio_actions/ssh-gen/configure.sh
+        echo "test=data" >> $GITHUB_OUTPUT
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
         RELEASE_EMAIL: ${{ inputs.user-email }}
