@@ -70,6 +70,6 @@ runs:
       shell: bash
       run: |
         echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
-        echo "The modified secret is: ${{ steps.ssh_gen.outputs.ssh_key }}"
+        [ -z ${{ steps.ssh_gen.outputs.ssh_key }} ] && echo "No Key" || echo "KEY present";
         
 
