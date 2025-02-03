@@ -19,9 +19,6 @@ outputs:
   ssh-key:
     description: 'ssh key generated'
     value: "${{ steps.ssh_gen.outputs.ssh_key }}"
-  test-data:
-    description: 'test'
-    value: "${{ steps.ssh_gen.outputs.test }}"
 runs:
   using: "composite"
   steps:
@@ -68,13 +65,7 @@ runs:
         RELEASE_EMAIL: ${{ inputs.user-email }}
         REPO: ${{ inputs.repo }}
         GH_TOKEN: ${{ inputs.token }}
-        GITHUB_OUTPUT: $GITHUB_OUTPUT
-#        SSH_KEY: ${{ secrets.${{ inputs.ssh-key-name }} }}
-    - name: "Test"
-      shell: bash
-      run: |
-        echo "The modified secret is: ${{ steps.ssh_gen.outputs.test }}"
-        [ -z "${{ steps.ssh_gen.outputs.ssh_key }}" ] && echo "No Key" || echo "KEY present"
+
         
         
 
