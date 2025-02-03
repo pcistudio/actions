@@ -24,4 +24,4 @@ jobs:
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GIT_ADMIN_PAT }}
