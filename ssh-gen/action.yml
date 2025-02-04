@@ -26,7 +26,6 @@ runs:
       shell: bash
       run: |
         set -e
-        set -x
 
         #[ -z "SSH_KEY" ] && echo "SSH_KEY is not set" && exit 1
         echo "test=data365" >> $GITHUB_OUTPUT
@@ -50,20 +49,9 @@ runs:
 
         gh repo deploy-key add "${PUB_KEY_PATH}" --title "release" --repo "${REPO}"
         echo "SSH key added to GitHub deploy keys"
-        
-        
 
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
         RELEASE_EMAIL: ${{ inputs.user-email }}
         REPO: ${{ inputs.repo }}
         GH_TOKEN: ${{ inputs.token }}
-  post:
-    - name: Clean up
-      shell: bash
-      run: |
-        KEY_PATH="$HOME/.ssh/id_ed25519"
-        PUB_KEY_PATH="${KEY_PATH}.pub"
-        # Clean up
-        rm -f "${KEY_PATH}" "${PUB_KEY_PATH}"
-        echo "SSH key removed from local storage"
