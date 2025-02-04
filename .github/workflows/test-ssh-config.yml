@@ -10,11 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure SSH Key
+        id: ssh-gen
+#        if: ${{ secrets.SSH_PRIVATE_KEY != '' }}
         uses: pcistudio/actions/ssh-gen@bugfix/ssh-gen
         with:
           ssh-key-name: "SSH_PRIVATE_KEY"
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
           token: ${{ secrets.GIT_ADMIN_PAT }}
-        env:
-          GH_TOKEN: ${{ secrets.GIT_ADMIN_PAT }}
+      - name: LOG
+        run: |
+          [ -z "${{ steps.ssh-gen.outputs.ssh-key }}" ] && echo "No SSH key generated" || echo "SSH key generated";
+          
