@@ -51,12 +51,17 @@ runs:
         gh repo deploy-key add "${PUB_KEY_PATH}" --title "release" --repo "${REPO}"
         echo "SSH key added to GitHub deploy keys"
         
-        # Clean up
-        rm -f "${KEY_PATH}" "${PUB_KEY_PATH}"
-        echo "SSH key removed from local storage"
+        
 
       env:
         SSH_KEY_NAME: ${{ inputs.ssh-key-name }}
         RELEASE_EMAIL: ${{ inputs.user-email }}
         REPO: ${{ inputs.repo }}
         GH_TOKEN: ${{ inputs.token }}
+  post:
+    - name: Clean up
+      shell: bash
+      run: |
+        # Clean up
+        rm -f "${KEY_PATH}" "${PUB_KEY_PATH}"
+        echo "SSH key removed from local storage"
