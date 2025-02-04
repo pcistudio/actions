@@ -13,7 +13,6 @@ inputs:
     description: >
       SSH key used to fetch the repository. The SSH key is configured with the local
       git config, which enables your scripts to run authenticated git commands.
-    required: true
   user-name:
     description: 'The name of the user that will be used to commit the changes'
     default: 'release-bot'
@@ -27,8 +26,20 @@ runs:
     - name: Set up SSH
       shell: bash
       run: |
-        mkdir -p ~/.ssh
-        echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519
+        if [ -n "${{ inputs.ssh-key }}" ]; then
+          mkdir -p ~/.ssh
+          echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519  
+          echo "SSH key is set as input parameter"
+        else 
+            echo "SSH key is not set as input"
+            echo "Checking for ~/.ssh/id_ed25519"
+            if [ ! -f ~/.ssh/id_ed25519 ]; then
+                echo "SSH key is not configured in the in ~/.ssh/id_ed25519"
+                exit 1
+            else
+                echo "SSH key is configured in the in ~/.ssh/id_ed25519"
+            fi
+        fi
         chmod 600 ~/.ssh/id_ed25519
         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
