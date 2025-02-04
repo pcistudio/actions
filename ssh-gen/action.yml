@@ -48,7 +48,7 @@ runs:
         gh secret set "${SSH_KEY_NAME}" --body "${SSH_PRIV}" --repo "${REPO}"
         echo "SSH key added to GitHub secret ${SSH_KEY_NAME}"
 
-        gh repo deploy-key add "${PUB_KEY_PATH}" --title "release" --repo "${REPO}"
+        gh repo deploy-key add "${PUB_KEY_PATH}" --title "release" --repo "${REPO}" --allow-write
         echo "SSH key added to GitHub deploy keys"
 
       env:
