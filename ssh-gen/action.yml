@@ -62,6 +62,8 @@ runs:
     - name: Clean up
       shell: bash
       run: |
+        KEY_PATH="$HOME/.ssh/id_ed25519"
+        PUB_KEY_PATH="${KEY_PATH}.pub"
         # Clean up
         rm -f "${KEY_PATH}" "${PUB_KEY_PATH}"
         echo "SSH key removed from local storage"
