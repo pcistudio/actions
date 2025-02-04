@@ -17,7 +17,7 @@ inputs:
     required: true
 outputs:
   ssh-key:
-    description: 'ssh key generated'
+    description: 'ssh key generated if it is not already created'
     value: "${{ steps.ssh_gen.outputs.ssh_key }}"
 runs:
   using: "composite"
