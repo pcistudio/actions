@@ -32,9 +32,12 @@ This action help to automatically synchronize the develop branch, once is merge 
 | user-email | The email of the user that will be used to commit the changes | | true     |
 
 
-## ssh-config
+## ssh-gen
 
-This action help to automatically generate the ssh keys, store the private key in a secret and the public is set in the deploy keys of the repository.
+This action help to automatically.
+1. Generate the ssh keys
+2. Store the private key in a `secret` 
+3. Store the public is set in the `Deploy keys` of the repository.
 
 ### Usage:
 
