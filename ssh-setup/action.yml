@@ -12,7 +12,6 @@ runs:
       shell: bash
       run: |
         set -e
-        set -x
         if [ -n "${SSH_KEY}" ]; then
           mkdir -p ~/.ssh
           echo "${SSH_KEY}" > ~/.ssh/id_ed25519  
