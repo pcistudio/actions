@@ -13,9 +13,9 @@ runs:
       run: |
         set -e
         set -x
-        if [ -n "${{ inputs.ssh-key }}" ]; then
+        if [ -n "${SSH_KEY}" ]; then
           mkdir -p ~/.ssh
-          echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519  
+          echo "${SSH_KEY}" > ~/.ssh/id_ed25519  
           echo "SSH key is present in the input parameter and is configured in the ~/.ssh/id_ed25519"
         else 
             echo "SSH key is not set as input"
@@ -29,4 +29,5 @@ runs:
         fi
         chmod 600 ~/.ssh/id_ed25519
         ssh-keyscan github.com >> ~/.ssh/known_hosts
-
+      env:
+        SSH_KEY: ${{ inputs.ssh-key }}

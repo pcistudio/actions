@@ -9,7 +9,7 @@ jobs:
   ssh-key-generation:
     runs-on: ubuntu-latest
     steps:
-      - name: Configure SSH Key
+      - name: SSH Key Generation
         id: ssh-gen
 #        if: ${{ secrets.SSH_PRIVATE_KEY != '' }}
         uses: pcistudio/actions/ssh-gen@12-add-ssh-setup-action
@@ -18,7 +18,7 @@ jobs:
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
           token: ${{ secrets.GIT_ADMIN_PAT }}
-      - name: Setup SSH
+      - name: SSH Setup
         uses: pcistudio/actions/ssh-setup@12-add-ssh-setup-action
         with:
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
