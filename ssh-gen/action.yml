@@ -26,7 +26,6 @@ runs:
       shell: bash
       run: |
         set -e
-
         
         KEY_PATH="$HOME/.ssh/id_ed25519"
         PUB_KEY_PATH="${KEY_PATH}.pub"
