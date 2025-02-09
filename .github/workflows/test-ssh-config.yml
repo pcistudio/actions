@@ -24,7 +24,7 @@ jobs:
       - name: SSH Setup
         uses: pcistudio/actions/ssh-setup@12-add-ssh-setup-action
         with:
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-key: "${{ secrets.SSH_PRIVATE_KEY }}"
       - name: LOG
         run: |
           [ -z "${{ steps.ssh-gen.outputs.ssh-key }}" ] && echo "No SSH key generated" || echo "SSH key generated";
