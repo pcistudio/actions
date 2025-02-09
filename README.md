@@ -1,4 +1,4 @@
-# Actions
+# Actions for PCI Studio [![Release actions](https://github.com/pcistudio/actions/actions/workflows/release.yml/badge.svg)](https://github.com/pcistudio/actions/actions/workflows/release.yml)
 
 ## Overview
 In this project, I am going to be adding some GitHub Actions needed for continuous integration and deployment, in the context of PCI Studio projects.
@@ -48,7 +48,7 @@ This action help to automatically.
     with:
       ssh-key-name: "SSH_PRIVATE_KEY"
       user-email: ${{ vars.RELEASE_EMAIL }}
-      token: PAT_TOKEN
+      personal-token: PAT_TOKEN
 ```
 
 ### Inputs Parameters
@@ -74,5 +74,25 @@ This action help to automatically set up the ssh key in the runner.
 ```
 
 
+## release
 
+This action automates the release of Java artifacts with Maven, publishing them to Maven Central while also releasing them on GitHub.
 
+### Usage:
+
+```yaml
+  - name: Release
+    uses: pcistudio/actions/release@v1
+    with:
+      ssh-key: ${{ secrets.SSH_PRIVATE_KEY_RELEASE }}
+      ssh-key-name: "SSH_PRIVATE_KEY_RELEASE"  # default: SSH_PRIVATE_KEY_RELEASE 
+      user-email: "email@gail.com"
+      user-name: "release-bot" # default: release-bot
+      token: "${{ secrets.personal_access_token }}"
+      maven-central-username: "${{ secrets.maven_central_username }}"
+      maven-central-password: "${{ secrets.maven_central_password }}"
+      gpg-passphrase: "${{ secrets.gpg_passphrase }}"
+      gpg-private-key: "${{ secrets.gpg_private_key }}"
+      server-id: "${{ secrets.server_id }}"
+      gh-token: "${{ secrets.GH_TOKEN }}"
+```
