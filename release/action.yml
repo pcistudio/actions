@@ -9,7 +9,7 @@ inputs:
   ssh-key-name:
     description: >
       The name of the secret that will have the ssh key.
-    default: "SSH_PRIVATE_KEY_TEMP"
+    default: "SSH_PRIVATE_KEY_RELEASE"
   user-name:
     description: >
       The user that will be used to create the release.

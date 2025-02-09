@@ -85,9 +85,9 @@ This action automates the release of Java artifacts with Maven, publishing them 
     uses: pcistudio/actions/release@v1
     with:
       ssh-key: ${{ secrets.SSH_PRIVATE_KEY_RELEASE }}
-      ssh-key-name: "SSH_PRIVATE_KEY_RELEASE"
-      user-email: "release-bot"
-      user-name: "email@gail.com"
+      ssh-key-name: "SSH_PRIVATE_KEY_RELEASE"  # default: SSH_PRIVATE_KEY_RELEASE 
+      user-email: "email@gail.com"
+      user-name: "release-bot" # default: release-bot
       token: "${{ secrets.personal_access_token }}"
       maven-central-username: "${{ secrets.maven_central_username }}"
       maven-central-password: "${{ secrets.maven_central_password }}"
