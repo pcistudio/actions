@@ -14,17 +14,17 @@ jobs:
 #        if: ${{ secrets.SSH_PRIVATE_KEY != '' }}
         uses: pcistudio/actions/ssh-gen@12-add-ssh-setup-action
         with:
-          ssh-key-name: "SSH_PRIVATE_KEY"
+          ssh-key-name: "SSH_PRIVATE_KEY_TEMP"
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
           token: ${{ secrets.GIT_ADMIN_PAT }}
       - name: LOG
         run: |
-          [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] && echo "No SSH key present in SSH_PRIVATE_KEY" || echo "SSH key present in SSH_PRIVATE_KEY";
+          [ -z "${{ secrets.SSH_PRIVATE_KEY_TEMP }}" ] && echo "No SSH key present in SSH_PRIVATE_KEY_TEMP" || echo "SSH key present in SSH_PRIVATE_KEY_TEMP";
       - name: SSH Setup
         uses: pcistudio/actions/ssh-setup@12-add-ssh-setup-action
         with:
-          ssh-key: "${{ secrets.SSH_PRIVATE_KEY }}"
+          ssh-key: "${{ secrets.SSH_PRIVATE_KEY_TEMP }}"
       - name: LOG
         run: |
           [ -z "${{ steps.ssh-gen.outputs.ssh-key }}" ] && echo "No SSH key generated" || echo "SSH key generated";
