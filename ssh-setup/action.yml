@@ -11,10 +11,12 @@ runs:
     - name: Set up SSH
       shell: bash
       run: |
+        set -e
+        set -x
         if [ -n "${{ inputs.ssh-key }}" ]; then
           mkdir -p ~/.ssh
           echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519  
-          echo "SSH key is set as input parameter"
+          echo "SSH key is present in the input parameter and is configured in the ~/.ssh/id_ed25519"
         else 
             echo "SSH key is not set as input"
             echo "Checking for ~/.ssh/id_ed25519"
