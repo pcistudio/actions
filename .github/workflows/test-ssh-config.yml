@@ -28,4 +28,3 @@ jobs:
       - name: LOG
         run: |
           [ -z "${{ steps.ssh-gen.outputs.ssh-key }}" ] && echo "No SSH key generated" || echo "SSH key generated";
-          
