@@ -18,6 +18,9 @@ jobs:
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
           token: ${{ secrets.GIT_ADMIN_PAT }}
+      - name: LOG
+        run: |
+          [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ] && echo "No SSH key present in SSH_PRIVATE_KEY" || echo "SSH key present in SSH_PRIVATE_KEY";
       - name: SSH Setup
         uses: pcistudio/actions/ssh-setup@12-add-ssh-setup-action
         with:
