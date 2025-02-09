@@ -1,4 +1,4 @@
-# Actions
+# Actions for PCI Studio [![Release actions](https://github.com/pcistudio/actions/actions/workflows/release.yml/badge.svg)](https://github.com/pcistudio/actions/actions/workflows/release.yml)
 
 ## Overview
 In this project, I am going to be adding some GitHub Actions needed for continuous integration and deployment, in the context of PCI Studio projects.
