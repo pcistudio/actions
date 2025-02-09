@@ -60,3 +60,19 @@ This action help to automatically.
 | token | The token use to store the key in the secrets. Needs to be a PAT   |                                   | true     |
 | repo | The repository were you want to create the secret with the SSH KEY | current repo `${github.repository}` | false    |
 
+
+## ssh-setup
+This action help to automatically set up the ssh key in the runner.
+
+### Usage:
+
+```yaml
+    - name: Setup SSH
+      uses: pcistudio/actions/ssh-setup@v1
+      with:
+        ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+```
+
+
+
+

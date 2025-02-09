@@ -3,7 +3,7 @@ name: Release actions
 on:
   push:
     branches:
-      - bugfix/ssh-gen
+      - 12-add-ssh-setup-action
 
 jobs:
   ssh-key-generation:
@@ -12,12 +12,16 @@ jobs:
       - name: Configure SSH Key
         id: ssh-gen
 #        if: ${{ secrets.SSH_PRIVATE_KEY != '' }}
-        uses: pcistudio/actions/ssh-gen@bugfix/ssh-gen
+        uses: pcistudio/actions/ssh-gen@12-add-ssh-setup-action
         with:
           ssh-key-name: "SSH_PRIVATE_KEY"
           repo: ${{ github.repository }}
           user-email: ${{ vars.RELEASE_EMAIL }}
           token: ${{ secrets.GIT_ADMIN_PAT }}
+      - name: Setup SSH
+        uses: pcistudio/actions/ssh-setup@12-add-ssh-setup-action
+        with:
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: LOG
         run: |
           [ -z "${{ steps.ssh-gen.outputs.ssh-key }}" ] && echo "No SSH key generated" || echo "SSH key generated";
